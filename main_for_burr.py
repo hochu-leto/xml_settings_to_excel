@@ -36,9 +36,9 @@ for tag in nodes:
     tg = empty_par.copy()
     t = tag
     pprint(t)
-    if 'Тип' in t.keys:
+    if 'Тип' in t.keys():
         v_type = t['Тип']
-    elif 'type' in t.keys:
+    elif 'type' in t.keys():
         v_type = t['type']
     else:
         print('No types ')
@@ -57,9 +57,9 @@ for tag in nodes:
     else:
         v_type = 'SIGNED32'
 
-    if 'scale' in t.keys:
+    if 'scale' in t.keys():
         scale = t['scale']
-    elif 'Коэф-т' in t.keys:
+    elif 'Коэф-т' in t.keys():
         scale = t['Коэф-т']
     else:
         print('No scale ')
@@ -72,57 +72,57 @@ for tag in nodes:
     #     v_type = 'SIGNED16'
     #     scale = 0
     #
-    if 'name' in t.keys:
+    if 'name' in t.keys():
         tg['name'] = t['name']
-    elif 'Название' in t.keys:
+    elif 'Название' in t.keys():
         tg['name'] = t['Название']
     else:
         print('No Название ')
         break
 
-    if 'address' in t.keys:
-        tg['address'] = hex(int(t['name']))
-    elif 'Адрес' in t.keys:
-        tg['address'] = hex(int(t['Адрес']))
+    if 'address' in t.keys():
+        tg['address'] = t['address']
+    elif 'Адрес' in t.keys():
+        tg['address'] = t['Адрес']
     else:
         print('No address ')
         break
 
-    if 'editable' in t.keys:
+    if 'editable' in t.keys():
         tg['editable'] = t['editable']
-    elif 'Запись' in t.keys:
+    elif 'Запись' in t.keys():
         tg['editable'] = t['Запись']
     else:
         print('No Запись ')
         break
 
-    if 'description' in t.keys:
+    if 'description' in t.keys():
         tg['description'] = t['description']
-    elif 'Описание' in t.keys:
+    elif 'Описание' in t.keys():
         tg['description'] = t['Описание']
     else:
         print('No Описание ')
         break
 
-    if 'unit' in t.keys:
+    if 'unit' in t.keys():
         tg['unit'] = t['unit']
-    elif 'Ед. изм.' in t.keys:
+    elif 'Ед. изм.' in t.keys():
         tg['unit'] = t['Ед. изм.']
     else:
         print('No Ед. изм. ')
         break
 
-    if 'Размер' in t.keys:
+    if 'Размер' in t.keys():
         tg['size'] = t['Размер']
-    elif 'size' in t.keys:
+    elif 'size' in t.keys():
         tg['size'] = t['size']
     else:
         print('No size ')
         break
 
-    if 'code' in t.keys:
+    if 'code' in t.keys():
         tg['code'] = t['code']
-    elif 'Код' in t.keys:
+    elif 'Код' in t.keys():
         tg['code'] = t['Код']
     else:
         print('No code ')
@@ -137,7 +137,10 @@ for tag in nodes:
     # tg['scale_format'] = t['scale_format']
     tg['type'] = v_type
     tg['period'] = 1
-    # tg['group'] = int(t['group_num'])  # возможно, здесь нужно делать проверку есть ли интежер, может,
+    if str(tg['address']) != 'nan':
+        tg['address'] = hex(int(tg['address']))
+
+            # tg['group'] = int(t['group_num'])  # возможно, здесь нужно делать проверку есть ли интежер, может,
     # здесь название группы
 
     final_list.append(tg.copy())
