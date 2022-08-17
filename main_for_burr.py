@@ -11,13 +11,13 @@ empty_par = {'name': '',
              'editable': '',
              'description': '',
              'scale': '',
-             'scaleB': '',
+             # 'scaleB': '',
              'unit': '',
              'value': '',
-             'scale_value': '',
-             'scale_format': '',
+             # 'scale_value': '',
+             # 'scale_format': '',
              'type': '',
-             'group': '',
+             # 'group': '',
              'period': ''}
 
 file_name = fd.askopenfilename()
@@ -144,7 +144,7 @@ for tag in nodes:
     # здесь название группы
 
     final_list.append(tg.copy())
-final_list = sorted(final_list, key=itemgetter('group'))
+# final_list = sorted(final_list, key=itemgetter('group'))
 
 old_par = empty_par
 old_group = ''
