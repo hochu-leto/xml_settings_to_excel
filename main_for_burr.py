@@ -72,17 +72,73 @@ for tag in nodes:
     #     v_type = 'SIGNED16'
     #     scale = 0
     #
-    # tg['name'] = t['FullText']
+    if 'name' in t.keys:
+        tg['name'] = t['name']
+    elif 'Название' in t.keys:
+        tg['name'] = t['Название']
+    else:
+        print('No Название ')
+        break
+
+    if 'address' in t.keys:
+        tg['address'] = hex(int(t['name']))
+    elif 'Адрес' in t.keys:
+        tg['address'] = hex(int(t['Адрес']))
+    else:
+        print('No address ')
+        break
+
+    if 'editable' in t.keys:
+        tg['editable'] = t['editable']
+    elif 'Запись' in t.keys:
+        tg['editable'] = t['Запись']
+    else:
+        print('No Запись ')
+        break
+
+    if 'description' in t.keys:
+        tg['description'] = t['description']
+    elif 'Описание' in t.keys:
+        tg['description'] = t['Описание']
+    else:
+        print('No Описание ')
+        break
+
+    if 'unit' in t.keys:
+        tg['unit'] = t['unit']
+    elif 'Ед. изм.' in t.keys:
+        tg['unit'] = t['Ед. изм.']
+    else:
+        print('No Ед. изм. ')
+        break
+
+    if 'Размер' in t.keys:
+        tg['size'] = t['Размер']
+    elif 'size' in t.keys:
+        tg['size'] = t['size']
+    else:
+        print('No size ')
+        break
+
+    if 'code' in t.keys:
+        tg['code'] = t['code']
+    elif 'Код' in t.keys:
+        tg['code'] = t['Код']
+    else:
+        print('No code ')
+        break
+
     # tg['address'] = hex(int(t['co_index'])) + hex(int(t['co_subindex']))[2:].zfill(2)
     # tg['editable'] = t['checked']
     # tg['description'] = t['EngText']
-    # tg['scale'] = scale
+    tg['scale'] = scale
     # tg['unit'] = t['tdim']
     # tg['scale_value'] = t['scale_value']
     # tg['scale_format'] = t['scale_format']
-    # tg['type'] = v_type
+    tg['type'] = v_type
+    tg['period'] = 1
     # tg['group'] = int(t['group_num'])  # возможно, здесь нужно делать проверку есть ли интежер, может,
-    # # здесь название группы
+    # здесь название группы
 
     final_list.append(tg.copy())
 final_list = sorted(final_list, key=itemgetter('group'))
@@ -91,13 +147,13 @@ old_par = empty_par
 old_group = ''
 f_list = []
 for par in final_list:
-    if par['group'] != old_group:
-        old_group = par['group']
-        old_par['name'] = 'group ' + str(par['name'])
-        f_list.append(old_par.copy())
+    if par['code'].count('.') == 2:
+        f_list.append(par)
+    elif par['code'].count('.') == 1:
+        par['name'] = 'group ' + str(par['name'])
+        f_list.append(par)
     else:
-        if par['unit'] != 'корень':
-            f_list.append(par)
+        pass
 df = pd.DataFrame(f_list, columns=tg.keys())
 
 df.to_excel(file_name.split('.')[0] + '_parse.xlsx', index=False)
