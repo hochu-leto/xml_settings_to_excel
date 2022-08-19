@@ -17,7 +17,7 @@ empty_par = {'name': '',
              # 'scale_value': '',
              # 'scale_format': '',
              'type': '',
-             # 'group': '',
+             'degree': '',
              'period': ''}
 
 file_name = fd.askopenfilename()
@@ -131,7 +131,7 @@ for tag in nodes:
     # tg['address'] = hex(int(t['co_index'])) + hex(int(t['co_subindex']))[2:].zfill(2)
     # tg['editable'] = t['checked']
     # tg['description'] = t['EngText']
-    tg['scale'] = scale
+    tg['degree'] = scale
     # tg['unit'] = t['tdim']
     # tg['scale_value'] = t['scale_value']
     # tg['scale_format'] = t['scale_format']
