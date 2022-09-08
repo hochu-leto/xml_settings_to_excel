@@ -127,8 +127,6 @@ for tag in nodes:
     else:
         print('No code ')
         break
-
-    # tg['address'] = hex(int(t['co_index'])) + hex(int(t['co_subindex']))[2:].zfill(2)
     # tg['editable'] = t['checked']
     # tg['description'] = t['EngText']
     tg['degree'] = scale
@@ -138,7 +136,7 @@ for tag in nodes:
     tg['type'] = v_type
     tg['period'] = 1
     if str(tg['address']) != 'nan':
-        tg['address'] = hex(int(tg['address']))
+        tg['address'] = '0x' + hex(int(tg['address']))[2::].zfill(4)
 
             # tg['group'] = int(t['group_num'])  # возможно, здесь нужно делать проверку есть ли интежер, может,
     # здесь название группы
