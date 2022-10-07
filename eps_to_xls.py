@@ -54,24 +54,6 @@ with open(file_name, "r") as file:
         if 'DefaultValue' in line:
             tg['value'] = line.strip()[13:]
 
-#     nodes = file.readlines()
-#
-#
-#
-#
-# for tag in nodes:
-#     tg = empty_par.copy()
-#     if ' // ' in tag:
-#         tg['name'] = 'group ' + tag.strip()[3:]
-#     elif 'static_cast' in tag:
-#         t = tag.split(',')
-#         tg['address'] = t[0].strip()[8:] + hex(int(t[1].strip()))[2:].zfill(2)
-#         tg['type'] = t[2].strip()[3:-16]
-#         if 'RW' in t[2]:
-#             tg['editable'] = 1
-#         tg['name'] = t[4].strip()[30:-1]
-#     if tg['name']:
-#         final_list.append(tg.copy())
 df = pd.DataFrame(final_list, columns=tg.keys())
 
 df.to_excel(file_name.split('.')[0] + '_parse.xlsx', index=False)
